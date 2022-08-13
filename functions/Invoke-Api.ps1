@@ -49,5 +49,3 @@ function Invoke-Api {
         $result.data.results | Write-Output
     }
 }
-
-Export-ModuleMember -Function Invoke-Api
