@@ -19,5 +19,3 @@ function New-AuthParams {
         } | Write-Output
     }
 }
-
-Export-ModuleMember -Function New-AuthParams
