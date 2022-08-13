@@ -3,7 +3,7 @@ $script:apiRoot = "https://gateway.marvel.com/v1/public"
 $script:storedKeyFolder = Join-Path -Path $env:LOCALAPPDATA -ChildPath "MarvelApi"
 $script:storedKeyFile = Join-Path -Path $storedKeyFolder -ChildPath "marvel.api.key.xml"
 
-$sourceList = @( 'classes', 'functions' )
+$sourceList = @( 'enums','classes', 'functions' )
 foreach ( $source in $sourceList ) {
     $functionPath = Join-Path -Path $PSScriptRoot -ChildPath $source -AdditionalChildPath "*.ps1"
     $functions = Get-ChildItem -Path $functionPath -Exclude *.Tests.*, _*
