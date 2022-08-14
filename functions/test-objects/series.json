@@ -1,0 +1,9 @@
+{
+    "id": 12345,
+    "modified": "2020-10-1 12:01:23",
+    "title": "Some Series",
+    "description": "Some description",
+    "startYear": 2001,
+    "endYear": 2007,
+    "rating": "T"
+}
