@@ -9,8 +9,23 @@ BeforeAll {
 
 Describe "Get-Series" {
     BeforeDiscovery {
-        $nameWildcardCases = @( '*' , '?' )
-        $idContentCases = @('Characters', 'Comics', 'Creators', 'Events', 'Stories')
+        $testSeriesData = Get-Content -Path (Join-Path -Path $PSScriptRoot -ChildPath test-objects -AdditionalChildPath series.json ) | ConvertFrom-Json
+        $idObjCases = @(
+            @{
+                type       = "Id"
+                goodId     = $testSeriesData.Id
+                testParams = @{
+                    Id = $testSeriesData.Id
+                }
+            }
+            @{
+                type       = "Series"
+                goodId     = $testSeriesData.Id
+                testParams = @{
+                    Series = $testSeriesData
+                }
+            }
+        )
     }
 
     BeforeAll {
@@ -29,26 +44,35 @@ Describe "Get-Series" {
         $goodName = $testSeriesObj.Title
     }
 
-    It "Searches for a series by name without a wildcard" {
-        Get-MarvelSeries -Name $goodName | Out-Null
-        Should @invokeParams -ParameterFilter { $Path -eq @( "series" ) -and $Query.title -eq $goodName -and $Query.Keys.Count -eq 1 }
+    Context "Series Name" {
+        BeforeDiscovery {
+            $nameWildcardCases = @( '*' , '?' )
+        }
+    
+        It "Searches for a series by name without a wildcard" {
+            Get-MarvelSeries -Name $goodName | Out-Null
+            Should @invokeParams -ParameterFilter { $Path -eq @( "series" ) -and $Query.title -eq $goodName -and $Query.Keys.Count -eq 1 }
+        }
+
+        It "Searches for a series by name with a <_> wildcard" -TestCases $nameWildcardCases {
+            Get-MarvelSeries -Name ( $goodName + $_ ) | Out-Null
+            Should @invokeParams -ParameterFilter { $Path -eq @( "series" ) -and $Query.titleStartsWith -eq $goodName -and $Query.Keys.Count -eq 1 }
+        }
     }
 
-    It "Searches for a series by name with a <_> wildcard" -TestCases $nameWildcardCases {
-        Get-MarvelSeries -Name ( $goodName + $_ ) | Out-Null
-        Should @invokeParams -ParameterFilter { $Path -eq @( "series" ) -and $Query.titleStartsWith -eq $goodName -and $Query.Keys.Count -eq 1 }
-    }
+    Context "Series <type>" -Foreach $idObjCases {
+        BeforeDiscovery {
+            $idContentCases = @('Characters', 'Comics', 'Creators', 'Events', 'Stories')
+        }
+    
+        It "Retrieves a series by <type>" {
+            Get-MarvelSeries @testParams | Out-Null
+            Should @invokeParams -ParameterFilter { $Path[0] -eq "series" -and $Path[1] -eq $goodId -and $Query.Keys.Count -eq 0 }
+        }
 
-    It "Retrieves a series by Id" {
-        $goodId = 98765
-        Get-MarvelSeries -Id $goodId | Out-Null
-        Should @invokeParams -ParameterFilter { $Path[0] -eq "series" -and $Path[1] -eq $goodId -and $Query.Keys.Count -eq 0 }
-    }
-
-    It "Retrieves a series by Id and content type <_>" -TestCases $idContentCases {
-        $contentType = $_
-        $goodId = 98765
-        Get-MarvelSeries -Id $goodId -Content $contentType | Out-Null
-        Should @invokeParams -ParameterFilter { $Path[0] -eq "series" -and $Path[1] -eq $goodId -and $Path[2] -eq $contentType -and $Query.Keys.Count -eq 0 }
-    }
-}
+        It "Retrieves a series by <type> and content type <_>" -TestCases $idContentCases {
+            $contentType = $_
+            Get-MarvelSeries @testParams -Content $contentType | Out-Null
+            Should @invokeParams -ParameterFilter { $Path[0] -eq "series" -and $Path[1] -eq $goodId -and $Path[2] -eq $contentType -and $Query.Keys.Count -eq 0 }
+        }
+    } }

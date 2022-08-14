@@ -6,6 +6,8 @@ function Get-Series {
             Queries the Marvel API for information about one or more Series (Also called "Titles").
         .PARAMETER Name
             Get information on a series with the given name. You may use wildcards at the end of this value to query for Series with names that start with the string.
+        .PARAMETER Series
+            A MarvelSeries object to look up.
         .PARAMETER Id
             The Id for a specific Marvel Series to look up.
         .PARAMETER Content
@@ -24,7 +26,12 @@ function Get-Series {
         [ValidateNotNullOrEmpty()]
         [int]$Id,
 
+        [Parameter(ParameterSetName = 'series', ValueFromPipeline = $true )]
+        [ValidateNotNullOrEmpty()]
+        [MarvelSeries]$Series,
+
         [Parameter(ParameterSetName = 'id')]
+        [Parameter(ParameterSetName = 'series')]
         [ValidateSet('All', 'Characters', 'Comics', 'Creators', 'Events', 'Stories')]
         [string]$Content = 'All'
     )
@@ -35,6 +42,10 @@ function Get-Series {
         # Search by known Id
         if ( $Id ) {
             $pathParts += $Id
+        }
+
+        if ( $Series ) {
+            $pathParts += $Series.Id
         }
 
         if ( $Content -ne 'All' ) {
