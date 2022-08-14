@@ -57,9 +57,6 @@ Describe "Register-ApiKey" {
                 Times      = 1
                 Exactly    = [switch]$true
             }
-
-            $goodKeyFolder = Join-Path -Path $env:LOCALAPPDATA -ChildPath "MarvelApi"
-            $goodKeyFile = Join-Path -Path $goodKeyFolder -ChildPath "marvel.api.key.xml"
         }
 
         It "Checks if the user's storage folder exists" {

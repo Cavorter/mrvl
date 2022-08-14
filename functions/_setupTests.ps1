@@ -9,6 +9,15 @@ $moduleName = $manifestFile.BaseName
 
 Import-Module $manifestFile.FullName -Force
 
+if ( $IsWindows -or ( -not (Get-Variable -Name IsWindows ) )) {
+    $goodKeyFolder = Join-Path -Path $env:LOCALAPPDATA -ChildPath "MarvelApi"
+}
+else {
+    $goodKeyFolder = Join-Path -Path $env:HOME -ChildPath ".MarvelApi"
+}
+$goodKeyFile = Join-Path -Path $goodKeyFolder -ChildPath "marvel.api.key.xml"
+
+
 $contentPath = Join-Path -Path $PSScriptRoot -ChildPath test-objects -AdditionalChildPath "*.json"
 foreach ( $item in ( Get-ChildItem -Path $contentPath )) {
     $dataVarName = "test$( $item.BaseName )Data"

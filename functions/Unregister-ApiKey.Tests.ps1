@@ -11,9 +11,6 @@ Describe "UnRegister-ApiKey" {
         Mock -ModuleName $moduleName -CommandName Remove-item -MockWith { return $true }
         Mock -ModuleName $moduleName -CommandName Remove-Variable -MockWith { return $true }
         Mock -ModuleName $moduleName -CommandName Test-Path -MockWith { return $true }
-
-        $goodKeyFolder = Join-Path -Path $env:LOCALAPPDATA -ChildPath "MarvelApi"
-        $goodKeyFile = Join-Path -Path $goodKeyFolder -ChildPath "marvel.api.key.xml"
     }
 
     It "Runs as expected without the Stored parameter" {
