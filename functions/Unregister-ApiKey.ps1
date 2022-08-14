@@ -16,7 +16,7 @@ function Unregister-ApiKey {
     }
 
     Process {
-        $script:registeredKeys = $null
+        Remove-Variable -Scope Script -Name registeredKeys
 
         if ( $Stored -and $storedExists -and $PSCmdlet.ShouldProcess( $verboseMsg , $verboseQuestion , 'Unregister-ApiKey' ) ) {
             Remove-Item -Path $script:storedKeyFile -Force
