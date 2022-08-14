@@ -4,6 +4,6 @@ BeforeAll {
 
 Describe "Get-Story" {
     It "Returns expected output" {
-        Get-Story | Should -Be "YOUR_EXPECTED_VALUE"
+        {Get-Story} | Should -Throw 'Get-Story is not implemented.'
     }
 }

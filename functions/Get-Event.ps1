@@ -1,5 +1,10 @@
 function Get-Event {
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute(RuleName = "PSAvoidOverwritingBuiltInCmdlets", Justification = "Module adds prefix so does not clobber.")]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidOverwritingBuiltInCmdlets", Justification = "Module adds prefix so does not clobber.")]
     Param()
-    throw [NotImplementedException]'Get-Event is not implemented.'
+
+    Begin {
+        throw [NotImplementedException]'Get-Event is not implemented.'
+    }
 }
+
+# Export-ModuleMember -Function Get-Event

@@ -4,6 +4,6 @@ BeforeAll {
 
 Describe "Get-Comic" {
     It "Returns expected output" {
-        Get-Comic | Should -Be "YOUR_EXPECTED_VALUE"
+        {Get-Comic} | Should -Throw 'Get-Comic is not implemented.'
     }
 }

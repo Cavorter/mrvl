@@ -6,7 +6,6 @@ BeforeAll {
     . $setupScript
 }
 
-
 Describe "Get-Series" {
     BeforeDiscovery {
         $testSeriesData = Get-Content -Path (Join-Path -Path $PSScriptRoot -ChildPath test-objects -AdditionalChildPath series.json ) | ConvertFrom-Json
@@ -48,7 +47,7 @@ Describe "Get-Series" {
         BeforeDiscovery {
             $nameWildcardCases = @( '*' , '?' )
         }
-    
+
         It "Searches for a series by name without a wildcard" {
             Get-MarvelSeries -Name $goodName | Out-Null
             Should @invokeParams -ParameterFilter { $Path -eq @( "series" ) -and $Query.title -eq $goodName -and $Query.Keys.Count -eq 1 }
@@ -64,7 +63,7 @@ Describe "Get-Series" {
         BeforeDiscovery {
             $idContentCases = @('Characters', 'Comics', 'Creators', 'Events', 'Stories')
         }
-    
+
         It "Retrieves a series by <type>" {
             Get-MarvelSeries @testParams | Out-Null
             Should @invokeParams -ParameterFilter { $Path[0] -eq "series" -and $Path[1] -eq $goodId -and $Query.Keys.Count -eq 0 }

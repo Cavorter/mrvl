@@ -4,6 +4,6 @@ BeforeAll {
 
 Describe "Get-Character" {
     It "Returns expected output" {
-        Get-Character | Should -Be "YOUR_EXPECTED_VALUE"
+        {Get-Character} | Should -Throw 'Get-Character is not implemented.'
     }
 }

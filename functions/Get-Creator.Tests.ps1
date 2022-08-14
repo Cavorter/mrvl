@@ -4,6 +4,6 @@ BeforeAll {
 
 Describe "Get-Creator" {
     It "Returns expected output" {
-        Get-Creator | Should -Be "YOUR_EXPECTED_VALUE"
+        {Get-Creator} | Should -Throw 'Get-Creator is not implemented.'
     }
 }
