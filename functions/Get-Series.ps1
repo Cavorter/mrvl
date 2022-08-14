@@ -1,4 +1,16 @@
 function Get-Series {
+    <#
+        .SYNOPSIS
+            Get information about a Marvel Series
+        .DESCRIPTION
+            Queries the Marvel API for information about one or more Series (Also called "Titles").
+        .PARAMETER Name
+            Get information on a series with the given name. You may use wildcards at the end of this value to query for Series with names that start with the string.
+        .PARAMETER Id
+            The Id for a specific Marvel Series to look up.
+        .PARAMETER Content
+            Return only the specified type of content for the specified Series by Id.
+    #>
     [OutputType([MarvelSeries[]])]
     [CmdletBinding()]
     Param(

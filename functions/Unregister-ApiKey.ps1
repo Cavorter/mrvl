@@ -1,4 +1,12 @@
 function Unregister-ApiKey {
+    <#
+        .SYNOPSIS
+            Removes a previously registered API Key pair.
+        .DESCRIPTION
+            By default will remove the previously registered API key pair from memory. If those keys have been persisted to disk, use the -Stored parameter to remove the persisted copy as well.
+        .PARAMETER Stored
+            Removes the stored api keys as well as the set in memory.
+    #>
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
     Param(
         [switch]$Stored,

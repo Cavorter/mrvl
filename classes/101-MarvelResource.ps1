@@ -19,16 +19,16 @@ class MarvelResource {
 
     # A resource list containing comics which feature this resource.
     [MarvelResourceList]$Comics
-    
+
     # A resource list containing the characters which appear in this comic.
     [MarvelResourceList]$Characters
 
     # A resource list of stories in which this resource appears.
     [MarvelResourceList]$Stories
-    
+
     # A resource list of events in which this resource appears.
     [MarvelResourceList]$Events
-    
+
     # A resource list of series in which this resource appears.
     [MarvelResourceList]$Series
 

@@ -1,4 +1,18 @@
 function Register-ApiKey {
+    <#
+        .SYNOPSIS
+            Registers a set of API Keys.
+
+        .DESCRIPTION
+            Registers a set of API Keys from the Marvel Developer Program with the current session or user.
+
+        .PARAMETER ApiKey
+            Takes a PSCredential object with the PublicKey as UserName and PrivateKey as Password. If left blank you will be prompted for the values.
+
+        .PARAMETER Persist
+            Stores the ApiKey pair on the file system in %LOCALAPPDATA%/MarvelApi/marvel.api.key.xml.
+            This option should not be used on public computers.
+    #>
     [CmdletBinding()]
     Param(
         [ValidateNotNullOrEmpty()]

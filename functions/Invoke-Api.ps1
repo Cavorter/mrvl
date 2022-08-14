@@ -19,7 +19,7 @@ function Invoke-Api {
         Write-Verbose "Uri Base: $uri"
         $uri = ( $uriBase + $Path ) -join '/'
 
-        $paramList = New-AuthParams
+        $paramList = New-AuthParam
         if ( $Query ) { $paramList += $Query }
         $paramItems = foreach ( $item in $paramList.Keys ) {
             Write-Verbose "Parameter: $item"
@@ -44,7 +44,7 @@ function Invoke-Api {
     Process {
         $result = Invoke-RestMethod -Method Get -Uri $safeUri.AbsoluteUri
         if ( $result.attributionText ) {
-            Write-Host $result.attributionText
+            Write-Information $result.attributionText
         }
         $result.data.results | Write-Output
     }

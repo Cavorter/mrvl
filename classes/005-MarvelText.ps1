@@ -1,3 +1,1 @@
-class MarvelText {
-    
-}
+class MarvelText {}

@@ -1,3 +1,6 @@
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
+Param()
+
 BeforeDiscovery {
     $setupScript = Join-Path -Path $PSScriptRoot -ChildPath _setupTests.ps1
     . $setupScript
@@ -29,7 +32,7 @@ Describe "Invoke-Api" {
                 }
             }
 
-            Mock -CommandName New-AuthParams -MockWith { return $goodAuthParams } -Verifiable
+            Mock -CommandName New-AuthParam -MockWith { return $goodAuthParams } -Verifiable
             Mock -CommandName Invoke-RestMethod -MockWith { return $goodData } -Verifiable
         }
 

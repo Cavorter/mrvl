@@ -1,3 +1,6 @@
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
+Param()
+
 $rootPath = Join-Path -Path $PSScriptRoot -ChildPath ..
 $manifestPath = Join-Path -Path $rootPath -ChildPath *.psd1
 $manifestFile = Get-ChildItem -Path $manifestPath

@@ -1,3 +1,7 @@
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingConvertToSecureStringWithPlainText", "")]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
+Param()
+
 BeforeAll {
     $setupScript = Join-Path -Path $PSScriptRoot -ChildPath _setupTests.ps1
     . $setupScript
