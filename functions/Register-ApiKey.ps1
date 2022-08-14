@@ -19,7 +19,7 @@ function Register-ApiKey {
     }
 
     Process {
-        $script:registeredKeys = $ApiKey
+        Set-Variable -Scope Script -Name registeredKeys -Value $ApiKey
 
         if ( $Persist ) {
             $ApiKey | Export-Clixml -Path $script:storedKeyFile -Force
