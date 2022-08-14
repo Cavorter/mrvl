@@ -1,6 +1,6 @@
 $script:apiRoot = "https://gateway.marvel.com/v1/public"
 
-if ( $IsWindows -or ( -not (Test-Variable 'variable:IsWindows') )) {
+if ( $IsWindows -or ( -not (Get-Variable -Name IsWindows ) )) {
     $script:storedKeyFolder = Join-Path -Path $env:LOCALAPPDATA -ChildPath "MarvelApi"
 }
 else {
