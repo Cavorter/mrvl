@@ -1,0 +1,26 @@
+name: Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: pester-tests-report
+        uses: zyborg/pester-tests-report@v1.5.0
+        with:
+          output_level: detailed
+          coverage_paths: functions
+          tests_fail_step: true
+          # github_token: # optional
